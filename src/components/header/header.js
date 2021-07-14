@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './header.sass';
+import {Link} from 'react-router-dom';
 
 
 export default class Header extends Component {
@@ -12,7 +13,7 @@ export default class Header extends Component {
 
         return(
             <header className="header">
-                <div className="header_logo">СМТ <span> Portal</span></div>
+                <Link className="header_logo" to='/home'>СМТ <span> Portal</span></Link>
                 <div className="navbar">
                     <div className="searchBar">
                         <input className="searchBar_input" type="text" name="" id=""></input>

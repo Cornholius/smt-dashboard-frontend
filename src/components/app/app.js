@@ -3,7 +3,10 @@ import './app.sass';
 import '../../fonts/stylesheet.css'
 import Header from '../header/header'
 import Sidebar from '../sidebar/sidebar'
-import Content from '../content/content'
+import Wiki from '../wiki/wiki'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
+
+
 export default class App extends Component {
 
     constructor(props) {
@@ -29,13 +32,17 @@ export default class App extends Component {
         const {posts, tags} = this.state
 
         return(
-            <div className="app">
-                <Header/>
-                <Sidebar/>
-                <Content
-                    posts={posts}
-                    tags={tags}/>
-            </div>
+            <Router>
+                <div className="app">
+                    <Header/>
+                    <Sidebar/>
+                    <Route path='/'/>
+                    <Route
+                        path='/wiki'
+                        render={ (props) => <Wiki {...props} posts={posts} tags={tags}/> }
+                    />
+                </div>
+            </Router>
         )
     }
 }

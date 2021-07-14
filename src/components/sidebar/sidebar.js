@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './sidebar.sass';
-
+import {Link} from 'react-router-dom';
 
 export default class Sidebar extends Component {
 
@@ -15,14 +15,14 @@ export default class Sidebar extends Component {
                 <div className="sidebar_menu">
                     <div className="sidebar_title">Вики</div>
                     <div className="line"></div>
-                    <div className="sidebar_subtitle" id="wikiAllPosts" data-show-content>Все заметки</div>
-                    <div className="sidebar_subtitle">Создать заметку</div>
+                    <Link className="sidebar_subtitle" to='/wiki'>Все заметки</Link>
+                    <Link className="sidebar_subtitle" to='/createpost'>Создать заметку</Link>
                 </div>
                 <div className="sidebar_menu">
                     <div className="sidebar_title">ToDo Лист</div>
                     <div className="line"></div>
-                    <div className="sidebar_subtitle" id="todoAllTasks" data-show-content>Все листы</div>
-                    <div className="sidebar_subtitle">Создать лист</div>
+                    <Link className="sidebar_subtitle" to='/todo'>Все листы</Link>
+                    <Link className="sidebar_subtitle" to='/createtodo'>Создать лист</Link>
                 </div>
             </section>
         )
