@@ -4,7 +4,10 @@ import '../../fonts/stylesheet.css'
 import Header from '../header/header'
 import Sidebar from '../sidebar/sidebar'
 import Wiki from '../wiki/wiki'
+import Todo from '../todo/todo'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
+import styled, { keyframes } from 'styled-components';
+import {fadeInUp} from 'react-animations';
 
 
 export default class App extends Component {
@@ -25,12 +28,26 @@ export default class App extends Component {
                 }
             ],
             tags: ['короткийтаг', 'средний', 'длинныйтаг2', 'ололо', 'жопа', 'какой_то_калл', 'дибилы', 'дегроиды', '1с', 'синхронизация', 'ВсратыйФотон', 'ЭДОВТБ', 'говномесы'],
+            FadeInUpAnimation: styled.div`animation: 0.8s ${keyframes`${fadeInUp}`}`,
+            lookingFor: '',
         }
     }
 
-    render() {
-        const {posts, tags} = this.state
+    onSearch(items, lookingFor) {
+        if (lookingFor.length === 0) {
+            return items
+        }
+        return items.filter((item) => {
+            return item.label.toLowerCase().indexOf(lookingFor) > -1;
+        });
+    }
 
+    onUpdateSearchText(text) {
+        this.setState({lookingFor: text});
+    }
+
+    render() {
+        const {posts, tags, FadeInUpAnimation} = this.state
         return(
             <Router>
                 <div className="app">
@@ -39,7 +56,11 @@ export default class App extends Component {
                     <Route path='/'/>
                     <Route
                         path='/wiki'
-                        render={ (props) => <Wiki {...props} posts={posts} tags={tags}/> }
+                        render={ (props) => <Wiki {...props} posts={posts} tags={tags} fadeinup={FadeInUpAnimation}/> }
+                    />
+                    <Route
+                        path='/todo'
+                        render={ (props) => <Todo {...props} fadeinup={FadeInUpAnimation}/> }
                     />
                 </div>
             </Router>

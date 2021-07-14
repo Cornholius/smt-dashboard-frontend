@@ -9,13 +9,16 @@ export default class Todo extends Component {
     }
 
     render() {
-
+        const {fadeinup} = this.props;
+        const FadeInUpAnimation = fadeinup;
         return(
-            <section className="content">
-                <div className="content_menu">
-                    <span>OLOLO</span>
-                </div>
-            </section>
+            <FadeInUpAnimation>
+                <section className="content">
+                    <div className="content_menu">
+                        <h2>Заглушка</h2>
+                    </div>
+                </section>
+            </FadeInUpAnimation>
         )
     }
 }
