@@ -2,13 +2,13 @@
   background-color: #EAEAEA
   display: grid
   grid-template-columns: minmax(288px, 15%) minmax(60%, 70%) minmax(10%, 15%)
-  grid-template-rows: 50px auto
+  grid-template-rows: 7vh auto
 
 .line
   width: 80%
   height: 5px
   background-color: rgba(78, 205, 196, 0.8)
-  border-radius: 0px 50px 50px 0px
+  border-radius: 0 50px 50px 0
 
 .hide
   display: none
@@ -21,3 +21,11 @@
     display: flex
   &_hide
     display: none
+
+.center
+  display: flex
+  justify-content: center
+
+.around
+  display: flex
+  justify-content: space-around

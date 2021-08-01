@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 
-import './search-panel.css'
 
 export default class SearchPanel extends Component {
     constructor(props) {
@@ -12,8 +11,8 @@ export default class SearchPanel extends Component {
     }
 
     onSearchUpdate(e) {
-        this.setState({lookingFor: e.target.value})
-        this.props.onUpdateSearchText(e.target.value)
+        this.setState({lookingFor: e.target.value.toLowerCase()})
+        this.props.onUpdateSearchText(e.target.value.toLowerCase())
     }
     render() {
         return (
@@ -24,7 +23,7 @@ export default class SearchPanel extends Component {
                     placeholder="Поиск по записям"
                     onChange={this.onSearchUpdate}
                 />
-                <button className="btn searchBar_btn">Найти</button>
+                {/*<button className="btn searchBar_btn">Найти</button>*/}
             </div>
         )
     }

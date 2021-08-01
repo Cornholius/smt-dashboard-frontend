@@ -6,20 +6,30 @@ export default class Wiki extends Component {
 
     constructor(props) {
         super(props);
+        this.filterByTag = this.filterByTag.bind(this)
+    }
+
+    filterByTag(id) {
+        console.log('id тега: ' + id);
+        fetch(`${this.props.tagUrl}${id}/`)
+            .then(response => response.json())
+            .then(result => console.log(result))
     }
 
     render() {
-        const {posts, tags, fadeinup} = this.props
+        const {posts, tags, fadeinup, fadein} = this.props
         const FadeInUpAnimation = fadeinup;
+        const FadeInAnimation = fadein;
         const renderedPosts = posts.map((post) => {
             return(
                 <FadeInUpAnimation>
-                <div className="card">
+                <div className="card" key={post.id}>
                     <div className="tags">
                         <div className="tags_text">Теги:</div>
                         {post.tags.map((tag) => {
+                            // const tagName = tags.find(item => item.id === tag);
                             return(
-                                <div className="tags_tag">{tag}</div>
+                                <div className="tags_tag" key={tag.id}>{tag.title}</div>
                             )
                         })}
                     </div>
@@ -32,17 +42,18 @@ export default class Wiki extends Component {
         const renderedTags = tags.map((tag) => {
             return(
                 <FadeInUpAnimation>
-                <div className="tags_tag">{tag}</div>
+                <div className="tags_tag" onClick={() => {this.filterByTag(tag.id)}}>{tag.title}</div>
                 </FadeInUpAnimation>
             )
         })
         return(
             <section className="content">
-                <div className="content_menu" id="wikiContent" data-content>
+                <div className="content_menu">
                     <div className="cardField">
                         {renderedPosts}
                     </div>
-                    <div className="tagField">
+                    <div className="tagField tagField__sticky">
+                        <div className="tagField_title">Быстрый поиск по тегам:</div>
                         {renderedTags}
                     </div>
                 </div>
