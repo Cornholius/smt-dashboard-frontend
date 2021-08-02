@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './wikiCreatePost.sass';
-
+// import '../dropzone/dropzone'
+import DropzoneComponent from '../dropzone/dropzone';
 
 export default class WikiCreatePost extends Component {
 
@@ -11,6 +12,8 @@ export default class WikiCreatePost extends Component {
             textInput: '',
             tagsInput: '',
             tags: [],
+            files: [],
+            images: [],
         };
         this.fillTheForm = this.fillTheForm.bind(this);
         this.createNewPost = this.createNewPost.bind(this);
@@ -25,11 +28,14 @@ export default class WikiCreatePost extends Component {
     createNewPost(e) {
         e.preventDefault()
         const form = e.target
-        const {titleInput, textInput, tagsInput, tags} = this.state
+        const {titleInput, textInput, tagsInput, tags, files, images} = this.state
         const newPost = {
             title: titleInput,
             text: textInput,
-            tags: tagsInput
+            tags: tagsInput,
+            files: files,
+            images: images,
+
         }
         this.props.postdata(newPost)
         form.reset()
@@ -67,31 +73,34 @@ export default class WikiCreatePost extends Component {
 
     render() {
         const {fadein, tags} = this.props
-        const FadeInAnimation = fadein;
-        const renderedTags = tags.map((tag) => {
-            return(
-                <div
-                    className="tags_tag"
-                    id={tag.id}
-                    key={tag.id}
-                    onClick={this.addTagToPost}>{tag.title}</div>
-            )
-        })
-        const addedTagsToPost = tags.map((tag) => {
-            if(this.state.tags.indexOf(tag.id) != -1) {
-                return(
-                    <div
-                        className="tags_tag"
-                        id={tag.id}
-                        key={tag.id}
-                        onClick={this.addTagToPost}>{tag.title}</div>
-                )
-            }
-
-        })
+        const FadeIn = fadein;
+        // const renderedTags = tags.map((tag) => {
+        //     return(
+        //         <div
+        //             className="tags_tag"
+        //             id={tag.id}
+        //             key={tag.id}
+        //             onClick={this.addTagToPost}>{tag.title}</div>
+        //     )
+        // })
+        // const addedTagsToPost = tags.map((tag) => {
+        //     if(this.state.tags.indexOf(tag.id) != -1) {
+        //         return(
+        //             <FadeIn>
+        //             <div
+        //                 className="tags_tag"
+        //                 id={tag.id}
+        //                 key={tag.id}
+        //                 onClick={this.addTagToPost}>{tag.title}
+        //             </div>
+        //             </FadeIn>
+        //         )
+        //     }
+        //
+        // })
         return(
-            <FadeInAnimation>
-            <section className="content around">
+            <section className="content">
+                <FadeIn className="newpost_fadein around">
                 <form className="newpost"
                     onSubmit={this.createNewPost}>
                     <input
@@ -106,9 +115,6 @@ export default class WikiCreatePost extends Component {
                         placeholder='Текст заметки'
                         maxLength='2000'
                         onChange={this.fillTheForm}/>
-                    {/*<div className="tagField tagField__newPost">*/}
-                    {/*    {addedTagsToPost}*/}
-                    {/*</div>*/}
                     <input
                         className='newpost_tags'
                         name='tagsInput'
@@ -118,23 +124,9 @@ export default class WikiCreatePost extends Component {
 
                     <button className="newpost_btn" type="submit">Создать</button>
                 </form>
-
-                {/*<div className="tagField">*/}
-                {/*    <form className="tagField_newTag"*/}
-                {/*          onSubmit={this.createNewTag}>*/}
-                {/*        <input*/}
-                {/*            className="tagField_input"*/}
-                {/*            name="tagsInput"*/}
-                {/*            placeholder="Напиши новый тег"*/}
-                {/*            onChange={this.fillTheForm}*/}
-                {/*        />*/}
-                {/*        <button className="btn tagField_btn">Создать</button>*/}
-                {/*    </form>*/}
-                {/*    <div className="tagField_title">Добавить теги к записи:</div>*/}
-                {/*    {renderedTags}*/}
-                {/*</div>*/}
+                <DropzoneComponent className="newpost_files"/>
+                </FadeIn>
             </section>
-            </FadeInAnimation>
         )
     }
 }

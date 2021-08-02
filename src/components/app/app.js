@@ -19,7 +19,7 @@ export default class App extends Component {
             posts: [],
             tags: [],
             FadeInUpAnimation: styled.div`animation: 0.8s ${keyframes`${fadeInUp}`}`,
-            FadeInAnimation: styled.div`animation: 1s ${keyframes`${fadeIn}`}`,
+            FadeInAnimation:  styled.div`animation: 1s ${keyframes`${fadeIn}`}`,
             lookingFor: '',
             postUrl: 'http://127.0.0.1:8000/api/posts/',
             tagUrl: 'http://127.0.0.1:8000/api/tags/',
@@ -41,7 +41,9 @@ export default class App extends Component {
             body: JSON.stringify({
                 title: data.title,
                 text: data.text,
-                tags: data.tags
+                tags: data.tags,
+                files: data.files,
+                images: data.images,
             })
         });
         const addPostResponse = await addPost.json();

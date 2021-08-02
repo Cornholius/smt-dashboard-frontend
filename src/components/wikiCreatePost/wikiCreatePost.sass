@@ -4,11 +4,15 @@
   align-items: center
   width: 50%
   align-self: center
+  &_fadein
+    display: flex
+    width: 100%
   &_title, &_text, &_tags
     display: block
     border-radius: 5px
     border: 0px solid
     margin-top: 20px
+    color: #2F323A
     font-family: Lato
     font-style: normal
     font-weight: 700
@@ -16,11 +20,16 @@
     padding: 10px
     width: 100%
     box-sizing: border-box
+
   &_title, &_tags
     height: 40px
+  &_title
+    margin-top: 0
   &_text
     height: 400px
     resize: none
+  &_files
+    height: 1100px
   &_btn
     margin-top: 20px
     align-self: flex-end
