@@ -38,7 +38,7 @@ const rejectStyle = {
 
 function DropzoneComponent(props) {
     const onDrop = useCallback(acceptedFiles => {
-        console.log(acceptedFiles);
+        console.log(acceptedFiles, props.name);
     }, []);
 
     const {

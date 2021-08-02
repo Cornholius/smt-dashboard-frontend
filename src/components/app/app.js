@@ -43,7 +43,6 @@ export default class App extends Component {
                 text: data.text,
                 tags: data.tags,
                 files: data.files,
-                images: data.images,
             })
         });
         const addPostResponse = await addPost.json();
