@@ -41,7 +41,7 @@ export default class App extends Component {
             body: JSON.stringify({
                 title: data.title,
                 text: data.text,
-                addTags: data.tags
+                tags: data.tags
             })
         });
         const addPostResponse = await addPost.json();

@@ -25,11 +25,11 @@ export default class WikiCreatePost extends Component {
     createNewPost(e) {
         e.preventDefault()
         const form = e.target
-        const {titleInput, textInput, tags} = this.state
+        const {titleInput, textInput, tagsInput, tags} = this.state
         const newPost = {
             title: titleInput,
             text: textInput,
-            tags: tags
+            tags: tagsInput
         }
         this.props.postdata(newPost)
         form.reset()
@@ -41,7 +41,7 @@ export default class WikiCreatePost extends Component {
         const form = e.target
         const newTag = {
             title: this.state.tagsInput,
-            slug: this.state.tagsInput
+            // slug: this.state.tagsInput
         }
         this.props.tagdata(newTag)
         form.reset()
@@ -106,25 +106,33 @@ export default class WikiCreatePost extends Component {
                         placeholder='Текст заметки'
                         maxLength='2000'
                         onChange={this.fillTheForm}/>
-                    <div className="tagField tagField__newPost">
-                        {addedTagsToPost}
-                    </div>
+                    {/*<div className="tagField tagField__newPost">*/}
+                    {/*    {addedTagsToPost}*/}
+                    {/*</div>*/}
+                    <input
+                        className='newpost_tags'
+                        name='tagsInput'
+                        placeholder='пиши сюда теги через пробел'
+                        maxLength='100'
+                        onChange={this.fillTheForm}/>
+
                     <button className="newpost_btn" type="submit">Создать</button>
                 </form>
-                <div className="tagField">
-                    <form className="tagField_newTag"
-                          onSubmit={this.createNewTag}>
-                        <input
-                            className="tagField_input"
-                            name="tagsInput"
-                            placeholder="Напиши новый тег"
-                            onChange={this.fillTheForm}
-                        />
-                        <button className="btn tagField_btn">Создать</button>
-                    </form>
-                    <div className="tagField_title">Добавить теги к записи:</div>
-                    {renderedTags}
-                </div>
+
+                {/*<div className="tagField">*/}
+                {/*    <form className="tagField_newTag"*/}
+                {/*          onSubmit={this.createNewTag}>*/}
+                {/*        <input*/}
+                {/*            className="tagField_input"*/}
+                {/*            name="tagsInput"*/}
+                {/*            placeholder="Напиши новый тег"*/}
+                {/*            onChange={this.fillTheForm}*/}
+                {/*        />*/}
+                {/*        <button className="btn tagField_btn">Создать</button>*/}
+                {/*    </form>*/}
+                {/*    <div className="tagField_title">Добавить теги к записи:</div>*/}
+                {/*    {renderedTags}*/}
+                {/*</div>*/}
             </section>
             </FadeInAnimation>
         )
