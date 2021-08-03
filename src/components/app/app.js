@@ -32,20 +32,34 @@ export default class App extends Component {
     }
 
     async postData(data) {
+        console.log('3=== приехало в postData === ', data)
+        console.log('3.1=== приехало в postData document === ', data['document'])
+        const formData = new FormData()
+        formData.append('title', data.title)
+        formData.append('text', data.text)
+        formData.append('tags', data.tags)
+
+        data['document'].forEach((i) => {
+            formData.append('document', i)
+        })
+        console.log('4=== закукожили в formData === ', formData)
+
         const addPost = await fetch(this.state.postUrl, {
             method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                title: data.title,
-                text: data.text,
-                tags: data.tags,
-                files: data.files,
-            })
+            // headers: {
+            //     'Accept': 'application/json',
+            //     'Content-Type': 'application/json'
+            // },
+            // body: JSON.stringify({
+            //     title: data.title,
+            //     text: data.text,
+            //     tags: data.tags,
+            //     document: data.document,
+            // })
+            body: formData
         });
-        const addPostResponse = await addPost.json();
+        const addPostResponse = await addPost.json()
+        console.log('5=== отправили/, ответ от сервера === ', addPostResponse)
         this.setState(({posts}) => {
             const newArray = [addPostResponse, ...posts]
             return {

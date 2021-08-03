@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './wikiCreatePost.sass';
-import DropzoneComponent from '../dropzone/dropzone';
+
 
 export default class WikiCreatePost extends Component {
 
@@ -10,69 +10,62 @@ export default class WikiCreatePost extends Component {
             titleInput: '',
             textInput: '',
             tagsInput: '',
-            tags: [],
-            files: [],
+            document: [],
         };
         this.fillTheForm = this.fillTheForm.bind(this);
         this.createNewPost = this.createNewPost.bind(this);
-        // this.createNewTag = this.createNewTag.bind(this);
-        // this.addTagToPost = this.addTagToPost.bind(this);
+        this.onDropEvent = this.onDropEvent.bind(this);
     };
 
     fillTheForm(e) {
-        console.log(e)
-        // console.log(e.dataTransfer.files)
-        // console.log(e.target.name, e.target.value)
-
-        // this.setState({[e.target.name]: e.target.value});
+        this.setState({[e.target.name]: e.target.value});
     }
 
     createNewPost(e) {
+        console.log('1.1=== пришло в createNewPost === ', this.state.document)
         e.preventDefault()
+        console.log('1.2=== createNewPost после e.preventDefault === ', this.state.document)
+
+
         const form = e.target
-        const {titleInput, textInput, tagsInput, files} = this.state
+        const {titleInput, textInput, tagsInput, document} = this.state
         const newPost = {
             title: titleInput,
             text: textInput,
             tags: tagsInput,
-            files: files,
+            document: document,
         }
+        console.log('2=== создали newPost === ', newPost)
         this.props.postdata(newPost)
         form.reset()
-        this.setState({tags: []})
     }
 
-    // createNewTag(e) {
-    //     e.preventDefault()
-    //     const form = e.target
-    //     const newTag = {
-    //         title: this.state.tagsInput,
-    //     }
-    //     this.props.tagdata(newTag)
-    //     form.reset()
-    // }
-    //
-    // addTagToPost(e) {
-    //     const allTags = this.state.tags
-    //     const tag = Number.parseInt(e.target.id);
-    //     this.setState(({tags}) => {
-    //         if(allTags.indexOf(tag) != -1) {
-    //             const index = allTags.findIndex(elem => elem === tag);
-    //             const newArr = [...allTags.slice(0, index), ...allTags.slice(index + 1)];
-    //             return {
-    //                 tags: newArr
-    //             };
-    //         }
-    //         const newArr = [...tags, tag];
-    //         return {
-    //             tags: newArr
-    //         };
-    //     });
-    // }
+    dragStartEvent(e) {
+        e.preventDefault()
+    }
+
+    dragLeaveEvent(e) {
+        e.preventDefault()
+    }
+
+    onDropEvent(e) {
+        e.preventDefault()
+        let files = [...e.dataTransfer.files]
+        const formData = new FormData()
+        formData.append('document', files[0])
+        this.setState(({document}) => {
+            const allFiles = [document, ...files]
+            return {
+                document: files
+            }
+        })
+        console.log('1=== передали в onDrop === ', this.state.document)
+    }
 
     render() {
         const {fadein} = this.props
         const FadeIn = fadein;
+
         return(
             <section className="content">
                 <FadeIn className="newpost_fadein around">
@@ -96,10 +89,16 @@ export default class WikiCreatePost extends Component {
                         placeholder='пиши сюда теги через пробел'
                         maxLength='100'
                         onChange={this.fillTheForm}/>
-                    <DropzoneComponent
-                        name= 'files'
-                        className="newpost_files"
-                        onDrop={e => this.fillTheForm(e)}/>
+
+                    <div
+                        className='newpost_files'
+                        onDragStart={e => this.dragStartEvent(e)}
+                        onDragLeave={e => this.dragLeaveEvent(e)}
+                        onDragOver={e => this.dragStartEvent(e)}
+                        onDrop={e => this.onDropEvent(e)}
+                    >
+                        <p className="newpost_droparea">Кидай сюда свои файлы, или жми на область для окна загрузки</p>
+                    </div>
 
                     <button className="newpost_btn" type="submit">Создать</button>
                 </form>
@@ -107,4 +106,6 @@ export default class WikiCreatePost extends Component {
             </section>
         )
     }
+
+
 }
