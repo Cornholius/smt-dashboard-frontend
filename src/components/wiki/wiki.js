@@ -10,7 +10,6 @@ export default class Wiki extends Component {
     }
 
     filterByTag(id) {
-        console.log('id тега: ' + id);
         fetch(`${this.props.tagUrl}${id}/`)
             .then(response => response.json())
             .then(result => console.log(result))
@@ -19,7 +18,6 @@ export default class Wiki extends Component {
     render() {
         const {posts, tags, fadeinup, fadein} = this.props
         const FadeInUpAnimation = fadeinup;
-        const FadeInAnimation = fadein;
         const renderedPosts = posts.map((post) => {
             return(
                 <FadeInUpAnimation>
@@ -27,7 +25,6 @@ export default class Wiki extends Component {
                     <div className="tags">
                         <div className="tags_text">Теги:</div>
                         {post.tags.map((tag) => {
-                            // const tagName = tags.find(item => item.id === tag);
                             return(
                                 <div className="tags_tag" key={tag.id}>{tag.title}</div>
                             )

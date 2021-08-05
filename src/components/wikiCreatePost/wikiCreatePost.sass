@@ -1,9 +1,4 @@
 .newpost
-  //display: flex
-  //flex-direction: column
-  //align-items: center
-  //width: 50%
-  //align-self: center
   display: grid
   width: 100%
   grid-template-columns: 50% 30%
@@ -12,24 +7,20 @@
   &_fadein
     display: flex
     width: 100%
-  &_title, &_text, &_tags, &_files
+  &_title, &_text, &_tags, &_droparea
     display: block
     grid-column-start: 1
     grid-column-end: 2
     border-radius: 5px
     border: 0px solid
-    //margin-top: 20px
     font-family: Lato
     font-style: normal
     font-weight: 700
     font-size: 18px
     padding: 10px
-    //width: 100%
     box-sizing: border-box
     &::placeholder
       color: #3b3b3b
-
-
   &_title, &_tags
     height: 40px
   &_title
@@ -37,7 +28,7 @@
   &_text
     height: 400px
     resize: none
-  &_files
+  &_droparea
     display: flex
     align-self: stretch
     grid-column-start: 2
@@ -47,19 +38,18 @@
     width: 100%
     align-items: center
     background-color: #fff
-  &_droparea
+  &_dropareatext
     color: #3b3b3b
     margin: 0
     padding: 0 20px
     text-align: center
-    //align-self: center
-
-
-    //height: 1100px
     box-sizing: border-box
     background-color: #fff
   &_btn
-    //margin-top: 20px
+    grid-column-start: 2
+    grid-column-end: 3
+    grid-row-start: 4
+    grid-row-end: 5
     align-self: flex-end
     width: 170px
     height: 50px
@@ -73,3 +63,32 @@
     background-color: rgba(78, 205, 196, 0.8)
     border-radius: 5px
     justify-self: end
+
+.files
+  display: flex
+  flex-wrap: wrap
+  align-self: start
+  grid-column-start: 1
+  grid-column-end: 2
+  grid-row-start: 4
+  grid-row-end: 5
+  &_item
+    display: flex
+  &_name, &_delete
+    display: flex
+    margin: 5px 0 5px 5px
+    padding: 3px 20px 3px 20px
+    background-color: rgba(78, 205, 196, 0.8)
+    border-radius: 5px 0 0 5px
+    align-items: center
+    text-align: center
+    font-family: Lato
+    font-style: normal
+    font-weight: 700
+    font-size: 16px
+    cursor: pointer
+  &_delete
+    display: flex
+    margin: 5px 5px 5px 0
+    border-radius: 0 5px 5px 0
+    padding: 3px 20px 3px 0

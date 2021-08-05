@@ -15,6 +15,7 @@ export default class WikiCreatePost extends Component {
         this.fillTheForm = this.fillTheForm.bind(this);
         this.createNewPost = this.createNewPost.bind(this);
         this.onDropEvent = this.onDropEvent.bind(this);
+        this.onDeleteBtn = this.onDeleteBtn.bind(this);
     };
 
     fillTheForm(e) {
@@ -22,11 +23,7 @@ export default class WikiCreatePost extends Component {
     }
 
     createNewPost(e) {
-        console.log('1.1=== пришло в createNewPost === ', this.state.document)
         e.preventDefault()
-        console.log('1.2=== createNewPost после e.preventDefault === ', this.state.document)
-
-
         const form = e.target
         const {titleInput, textInput, tagsInput, document} = this.state
         const newPost = {
@@ -35,8 +32,8 @@ export default class WikiCreatePost extends Component {
             tags: tagsInput,
             document: document,
         }
-        console.log('2=== создали newPost === ', newPost)
         this.props.postdata(newPost)
+        this.setState(({document: []}))
         form.reset()
     }
 
@@ -51,15 +48,21 @@ export default class WikiCreatePost extends Component {
     onDropEvent(e) {
         e.preventDefault()
         let files = [...e.dataTransfer.files]
-        const formData = new FormData()
-        formData.append('document', files[0])
         this.setState(({document}) => {
-            const allFiles = [document, ...files]
+            let newArrFiles = [...document, ...files]
             return {
-                document: files
+                document: newArrFiles
             }
         })
-        console.log('1=== передали в onDrop === ', this.state.document)
+    }
+
+    onDeleteBtn(item) {
+        this.setState(({document}) => {
+            const array = this.state.document.filter(file => file.name !== item.name)
+            return {
+                document: array
+            }
+        })
     }
 
     render() {
@@ -91,15 +94,24 @@ export default class WikiCreatePost extends Component {
                         onChange={this.fillTheForm}/>
 
                     <div
-                        className='newpost_files'
+                        className='newpost_droparea'
                         onDragStart={e => this.dragStartEvent(e)}
                         onDragLeave={e => this.dragLeaveEvent(e)}
                         onDragOver={e => this.dragStartEvent(e)}
                         onDrop={e => this.onDropEvent(e)}
                     >
-                        <p className="newpost_droparea">Кидай сюда свои файлы, или жми на область для окна загрузки</p>
+                        <p className="newpost_dropareatext">Кидай сюда свои файлы, или жми на область для окна загрузки</p>
                     </div>
-
+                    <div className="files">
+                        {this.state.document.map((file) => {
+                            return(
+                                <div className="files_item">
+                                    <div className="files_name">{file.name}</div>
+                                    <svg className="files_delete" onClick={() => this.onDeleteBtn(file)} height="15pt" viewBox="0 0 512 512" width="15pt" xmlns="http://www.w3.org/2000/svg"><path d="m256 0c-141.164062 0-256 114.835938-256 256s114.835938 256 256 256 256-114.835938 256-256-114.835938-256-256-256zm0 0" fill="#f44336"/><path d="m350.273438 320.105469c8.339843 8.34375 8.339843 21.824219 0 30.167969-4.160157 4.160156-9.621094 6.25-15.085938 6.25-5.460938 0-10.921875-2.089844-15.082031-6.25l-64.105469-64.109376-64.105469 64.109376c-4.160156 4.160156-9.621093 6.25-15.082031 6.25-5.464844 0-10.925781-2.089844-15.085938-6.25-8.339843-8.34375-8.339843-21.824219 0-30.167969l64.109376-64.105469-64.109376-64.105469c-8.339843-8.34375-8.339843-21.824219 0-30.167969 8.34375-8.339843 21.824219-8.339843 30.167969 0l64.105469 64.109376 64.105469-64.109376c8.34375-8.339843 21.824219-8.339843 30.167969 0 8.339843 8.34375 8.339843 21.824219 0 30.167969l-64.109376 64.105469zm0 0" fill="#fafafa"/></svg>
+                                </div>
+                            )
+                        })}
+                    </div>
                     <button className="newpost_btn" type="submit">Создать</button>
                 </form>
                 </FadeIn>

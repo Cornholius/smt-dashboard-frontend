@@ -42,24 +42,11 @@ export default class App extends Component {
         data['document'].forEach((i) => {
             formData.append('document', i)
         })
-        console.log('4=== закукожили в formData === ', formData)
-
         const addPost = await fetch(this.state.postUrl, {
             method: 'POST',
-            // headers: {
-            //     'Accept': 'application/json',
-            //     'Content-Type': 'application/json'
-            // },
-            // body: JSON.stringify({
-            //     title: data.title,
-            //     text: data.text,
-            //     tags: data.tags,
-            //     document: data.document,
-            // })
             body: formData
         });
         const addPostResponse = await addPost.json()
-        console.log('5=== отправили/, ответ от сервера === ', addPostResponse)
         this.setState(({posts}) => {
             const newArray = [addPostResponse, ...posts]
             return {
@@ -96,7 +83,6 @@ export default class App extends Component {
             .then(response => response.json())
             .then(result => this.setState({[data]: result}));
     }
-
 
     onSearch(items, lookingFor) {
         if (lookingFor.length === 0) {
