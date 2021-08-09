@@ -40,7 +40,7 @@ export default class App extends Component {
         data['document'].forEach((i) => {
             formData.append('document', i)
         })
-        const addPost = await fetch(this.state.postUrl, {
+        await fetch(this.state.postUrl, {
             method: 'POST',
             body: formData
         });
@@ -101,7 +101,14 @@ export default class App extends Component {
     }
 
     onUpdateSearchText(text) {
-        this.setState({lookingFor: text});
+        if (this.state.lookingFor.substring(0, 3) === 'TAG' && this.state.lookingFor === text)
+        {
+            this.setState({lookingFor: ''});
+        }
+        else
+        {
+            this.setState({lookingFor: text});
+        }
     }
 
     render() {
@@ -110,6 +117,7 @@ export default class App extends Component {
             <Router>
                 <div className="app">
                     <Header
+                        lookingFor={lookingFor}
                         onUpdateSearchText={this.onUpdateSearchText}/>
                     <Sidebar/>
                     <Route

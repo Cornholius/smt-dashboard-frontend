@@ -6,13 +6,39 @@ export default class Wiki extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            tagBG: false,
+            lastTag: 1
+        }
+        this.imageRef = React.createRef()
         this.filterByTag = this.filterByTag.bind(this)
     }
 
     filterByTag(currentTag) {
-        // if ()
+        let bgColor = this.state.tagBG ? "#d195ff" : "#4ECDC4"
+        const activeTag = document.getElementById(currentTag.id)
+
+        if (currentTag.id !== this.state.lastTag) {
+            console.log('!!!')
+            const lastActiveTag = document.getElementById(this.state.lastTag)
+            lastActiveTag.style.cssText = "background-color: #d195ff; transition: all 0.5s ease 0s"
+            // this.setState(({tagBG: !this.state.tagBG}))
+            console.log('01 ', this.state.tagBG)
+            activeTag.style.cssText = `background-color: ${bgColor}; transition: all 0.5s ease 0s`
+
+            this.setState(({lastTag: currentTag.id}))
+        }
+        else {
+            activeTag.style.cssText = `background-color: ${bgColor}; transition: all 0.5s ease 0s`
+
+        }
+
+        this.setState(({tagBG: !this.state.tagBG}))
+        console.log('02 ', this.state.tagBG)
         this.props.onUpdateSearchText('TAG' + currentTag.title)
     }
+
+
     render() {
         const {posts, tags, fadeinup} = this.props
         const FadeInUpAnimation = fadeinup;
@@ -34,10 +60,15 @@ export default class Wiki extends Component {
                 </FadeInUpAnimation>
             )
         })
-        const renderedTags = tags.map((tag) => {
+        const renderedTags = tags.map((tag, index) => {
             return(
                 <FadeInUpAnimation>
-                <div className="tags_tag" onClick={() => {this.filterByTag(tag)}}>{tag.title}</div>
+                <div 
+                    className="tags_tag" 
+                    key={index} 
+                    id={tag.id}
+                    onClick={() => {this.filterByTag(tag)}}
+                >{tag.title}</div>
                 </FadeInUpAnimation>
             )
         })
