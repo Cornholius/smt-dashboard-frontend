@@ -23,7 +23,6 @@ export default class SearchPanel extends Component {
                     placeholder="Поиск по записям"
                     onChange={this.onSearchUpdate}
                 />
-                {/*<button className="btn searchBar_btn">Найти</button>*/}
             </div>
         )
     }

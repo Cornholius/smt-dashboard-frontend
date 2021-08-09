@@ -22,9 +22,8 @@ export default class WikiCreatePost extends Component {
         this.setState({[e.target.name]: e.target.value});
     }
 
-    createNewPost(e) {
+    async createNewPost(e) {
         e.preventDefault()
-        const form = e.target
         const {titleInput, textInput, tagsInput, document} = this.state
         const newPost = {
             title: titleInput,
@@ -32,9 +31,8 @@ export default class WikiCreatePost extends Component {
             tags: tagsInput,
             document: document,
         }
-        this.props.postdata(newPost)
-        this.setState(({document: []}))
-        form.reset()
+        await this.props.postdata(newPost)
+        this.props.history.push('/wiki')
     }
 
     dragStartEvent(e) {

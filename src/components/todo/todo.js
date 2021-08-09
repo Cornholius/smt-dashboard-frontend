@@ -4,10 +4,6 @@ import './todo.sass';
 
 export default class Todo extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         const {fadein} = this.props;
         const FadeInAnimation = fadein;

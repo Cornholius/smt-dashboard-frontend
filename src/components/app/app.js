@@ -21,8 +21,8 @@ export default class App extends Component {
             FadeInUpAnimation: styled.div`animation: 0.8s ${keyframes`${fadeInUp}`}`,
             FadeInAnimation:  styled.div`animation: 1s ${keyframes`${fadeIn}`}`,
             lookingFor: '',
-            postUrl: 'http://127.0.0.1:8000/api/posts/',
-            tagUrl: 'http://127.0.0.1:8000/api/tags/',
+            postUrl: 'http://10.10.10.64:8000/api/posts/',
+            tagUrl: 'http://10.10.10.64:8000/api/tags/',
         }
         this.onUpdateSearchText = this.onUpdateSearchText.bind(this);
         this.postData = this.postData.bind(this);
@@ -32,8 +32,6 @@ export default class App extends Component {
     }
 
     async postData(data) {
-        console.log('3=== приехало в postData === ', data)
-        console.log('3.1=== приехало в postData document === ', data['document'])
         const formData = new FormData()
         formData.append('title', data.title)
         formData.append('text', data.text)
@@ -46,17 +44,12 @@ export default class App extends Component {
             method: 'POST',
             body: formData
         });
-        const addPostResponse = await addPost.json()
-        this.setState(({posts}) => {
-            const newArray = [addPostResponse, ...posts]
-            return {
-                posts: newArray
-            }
-        })
+        this.getAllData(this.state.postUrl, 'posts')
+        this.getAllData(this.state.tagUrl, 'tags')
     }
 
     async tagData(data) {
-        const response = await fetch('http://127.0.0.1:8000/api/tags/', {
+        const response = await fetch(this.state.tagUrl, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -78,16 +71,13 @@ export default class App extends Component {
         })
     }
 
-    getAllData(url, data) {
-        fetch(url)
+    async getAllData(url, data) {
+        await fetch(url)
             .then(response => response.json())
             .then(result => this.setState({[data]: result}));
     }
 
     onSearch(items, lookingFor) {
-        console.log('lookingfor', lookingFor)
-        console.log(lookingFor.substring(0, 3))
-        console.log(lookingFor.substring(3))
         if (lookingFor.length === 0) {
             return items
         }
@@ -105,11 +95,7 @@ export default class App extends Component {
         return items.filter((item) => {
             const findInTitle = item.title.toLowerCase().indexOf(lookingFor) > -1;
             const findInText = item.text.toLowerCase().indexOf(lookingFor) > -1;
-            const findInTags = item.tags.forEach(tag => {
-                if (tag.title === lookingFor)
-                return item
-            })
-            const result = findInTitle || findInText || findInTags
+            const result = findInTitle || findInText
             return result
         });
     }

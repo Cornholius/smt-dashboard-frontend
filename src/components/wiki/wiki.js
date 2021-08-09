@@ -10,22 +10,11 @@ export default class Wiki extends Component {
     }
 
     filterByTag(currentTag) {
-        // const filteredPosts = this.props.posts.map((post) => {
-        //     if (post.tags.length > 0) {
-        //         post.tags.forEach((tag) => {
-        //             if (tag.id === currentTag.id) {
-        //                 console.log('===> ', currentTag.title)
-        //                 return post
-        //             }
-        //         })
-        //     }
-        // })
-        // this.setState({posts: filteredPosts})
-        // this.props.filterByTag(filteredPosts, '')
+        // if ()
         this.props.onUpdateSearchText('TAG' + currentTag.title)
     }
     render() {
-        const {posts, tags, fadeinup, fadein} = this.props
+        const {posts, tags, fadeinup} = this.props
         const FadeInUpAnimation = fadeinup;
         const renderedPosts = posts.map((post) => {
             return(
