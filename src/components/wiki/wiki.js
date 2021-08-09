@@ -14,11 +14,8 @@ export default class Wiki extends Component {
     }
 
     filterByTag(currentTag) {
-        this.setState({activeTag: currentTag.id})
-        let className = this.state.className
-        className = className + ' ololo'
-        this.setState({className})
-
+        if (this.state.activeTag === currentTag.id) this.setState({activeTag: ''})
+        else this.setState({activeTag: currentTag.id})
         this.props.onUpdateSearchText('TAG' + currentTag.title)
     }
 
