@@ -85,13 +85,31 @@ export default class App extends Component {
     }
 
     onSearch(items, lookingFor) {
+        console.log('lookingfor', lookingFor)
+        console.log(lookingFor.substring(0, 3))
+        console.log(lookingFor.substring(3))
         if (lookingFor.length === 0) {
             return items
+        }
+        if (lookingFor.substring(0, 3) === 'TAG') {
+            const findInTags = []
+            items.forEach((item) => {
+                item.tags.forEach(tag => {
+                    if (tag.title === lookingFor.substring(3)) {
+                        findInTags.push(item)
+                    }
+                })
+            })
+            return findInTags
         }
         return items.filter((item) => {
             const findInTitle = item.title.toLowerCase().indexOf(lookingFor) > -1;
             const findInText = item.text.toLowerCase().indexOf(lookingFor) > -1;
-            const result = findInTitle || findInText
+            const findInTags = item.tags.forEach(tag => {
+                if (tag.title === lookingFor)
+                return item
+            })
+            const result = findInTitle || findInText || findInTags
             return result
         });
     }
@@ -112,6 +130,7 @@ export default class App extends Component {
                         path='/wiki'
                         render={ (props) => <Wiki {...props}
                                                   posts={this.onSearch(posts, lookingFor)}
+                                                  onUpdateSearchText={this.onUpdateSearchText}
                                                   tags={tags}
                                                   tagUrl={tagUrl}
                                                   fadein={FadeInAnimation}
@@ -119,7 +138,7 @@ export default class App extends Component {
                     />
                     <Route
                         path='/todo'
-                        render={ (props) => <Todo {...props} fadeinup={FadeInUpAnimation}/> }
+                        render={ (props) => <Todo {...props} fadein={FadeInAnimation}/> }
                     />
                     <Route
                         path='/createpost'

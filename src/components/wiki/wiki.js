@@ -9,23 +9,20 @@ export default class Wiki extends Component {
         this.filterByTag = this.filterByTag.bind(this)
     }
 
-    // filterByTag(id) {
-    //     fetch(`${this.props.tagUrl}${id}/`)
-    //         .then(response => response.json())
-    //         .then(result => console.log(result))
-    // }
-
-    filterByTag(id) {
-        this.props.posts.map((post) => {
-            if (post.tags.length > 0) {
-                post.tags.forEach((tag) => {
-                    if (tag.id === id) {
-                        console.log('===> ', post.title)
-
-                    }
-                })
-            }
-        })
+    filterByTag(currentTag) {
+        // const filteredPosts = this.props.posts.map((post) => {
+        //     if (post.tags.length > 0) {
+        //         post.tags.forEach((tag) => {
+        //             if (tag.id === currentTag.id) {
+        //                 console.log('===> ', currentTag.title)
+        //                 return post
+        //             }
+        //         })
+        //     }
+        // })
+        // this.setState({posts: filteredPosts})
+        // this.props.filterByTag(filteredPosts, '')
+        this.props.onUpdateSearchText('TAG' + currentTag.title)
     }
     render() {
         const {posts, tags, fadeinup, fadein} = this.props
@@ -51,7 +48,7 @@ export default class Wiki extends Component {
         const renderedTags = tags.map((tag) => {
             return(
                 <FadeInUpAnimation>
-                <div className="tags_tag" onClick={() => {this.filterByTag(tag.id)}}>{tag.title}</div>
+                <div className="tags_tag" onClick={() => {this.filterByTag(tag)}}>{tag.title}</div>
                 </FadeInUpAnimation>
             )
         })
