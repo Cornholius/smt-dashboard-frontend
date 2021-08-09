@@ -7,34 +7,18 @@ export default class Wiki extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            tagBG: false,
-            lastTag: 1
+            activeTag: '',
         }
         this.imageRef = React.createRef()
         this.filterByTag = this.filterByTag.bind(this)
     }
 
     filterByTag(currentTag) {
-        let bgColor = this.state.tagBG ? "#d195ff" : "#4ECDC4"
-        const activeTag = document.getElementById(currentTag.id)
+        this.setState({activeTag: currentTag.id})
+        let className = this.state.className
+        className = className + ' ololo'
+        this.setState({className})
 
-        if (currentTag.id !== this.state.lastTag) {
-            console.log('!!!')
-            const lastActiveTag = document.getElementById(this.state.lastTag)
-            lastActiveTag.style.cssText = "background-color: #d195ff; transition: all 0.5s ease 0s"
-            // this.setState(({tagBG: !this.state.tagBG}))
-            console.log('01 ', this.state.tagBG)
-            activeTag.style.cssText = `background-color: ${bgColor}; transition: all 0.5s ease 0s`
-
-            this.setState(({lastTag: currentTag.id}))
-        }
-        else {
-            activeTag.style.cssText = `background-color: ${bgColor}; transition: all 0.5s ease 0s`
-
-        }
-
-        this.setState(({tagBG: !this.state.tagBG}))
-        console.log('02 ', this.state.tagBG)
         this.props.onUpdateSearchText('TAG' + currentTag.title)
     }
 
@@ -64,7 +48,7 @@ export default class Wiki extends Component {
             return(
                 <FadeInUpAnimation>
                 <div 
-                    className="tags_tag" 
+                    className={this.state.activeTag===tag.id ? 'tags_tag tags_tag--active': 'tags_tag'} 
                     key={index} 
                     id={tag.id}
                     onClick={() => {this.filterByTag(tag)}}
