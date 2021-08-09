@@ -129,7 +129,8 @@ export default class App extends Component {
                                                             tags={tags}
                                                             postUrl={postUrl}
                                                             tagUrl={tagUrl}
-                                                            fadein={FadeInAnimation}/> }
+                                                            fadein={FadeInAnimation}
+                                                            fadeinup={FadeInUpAnimation}/> }
                     />
                 </div>
             </Router>

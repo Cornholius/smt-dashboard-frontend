@@ -9,12 +9,24 @@ export default class Wiki extends Component {
         this.filterByTag = this.filterByTag.bind(this)
     }
 
-    filterByTag(id) {
-        fetch(`${this.props.tagUrl}${id}/`)
-            .then(response => response.json())
-            .then(result => console.log(result))
-    }
+    // filterByTag(id) {
+    //     fetch(`${this.props.tagUrl}${id}/`)
+    //         .then(response => response.json())
+    //         .then(result => console.log(result))
+    // }
 
+    filterByTag(id) {
+        this.props.posts.map((post) => {
+            if (post.tags.length > 0) {
+                post.tags.forEach((tag) => {
+                    if (tag.id === id) {
+                        console.log('===> ', post.title)
+
+                    }
+                })
+            }
+        })
+    }
     render() {
         const {posts, tags, fadeinup, fadein} = this.props
         const FadeInUpAnimation = fadeinup;
