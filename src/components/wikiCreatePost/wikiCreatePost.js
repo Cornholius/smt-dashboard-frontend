@@ -101,7 +101,7 @@ export default class WikiCreatePost extends Component {
                     >
                         <p className="newpost_dropareatext">Кидай сюда свои файлы, или жми на область для окна загрузки</p>
                     </div>
-                    <div className="files">
+                    <div className="files files--position">
                         {this.state.document.map((file) => {
                             return(
                                 <FadeInUp>

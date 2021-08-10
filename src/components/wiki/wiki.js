@@ -39,7 +39,11 @@ export default class Wiki extends Component {
                             )
                         })}
                     </div>
+                    {/* <div className="line mtb10"></div> */}
+
                     <div className="card_title">{post.title}</div>
+                    <div className="line mtb10"></div>
+
                     <div className="card_text">{post.text}</div>
                 </div>
                 </FadeInUpAnimation>

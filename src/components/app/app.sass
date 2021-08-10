@@ -32,5 +32,131 @@
 
 .active
 	background-color: 
+
 .p0
 	padding: 0
+
+.mtb10
+	margin: 10px 0
+
+.files
+	display: flex
+	flex-wrap: wrap
+	align-items: center
+	align-self: center
+	&--position
+		align-self: start
+		grid-column-start: 1
+		grid-column-end: 2
+		grid-row-start: 4
+		grid-row-end: 5
+	&_text
+		display: flex
+		padding-right: 20px
+		align-items: center
+		text-align: center
+		padding-left: 50px
+		font-family: Lato
+		font-style: normal
+		font-weight: 700
+		font-size: 18px
+	&_item
+		display: flex
+		&--detail
+			display: flex
+			border-radius: 5px
+
+	&_name, &_delete
+		display: flex
+		margin: 5px 0 5px 5px
+		padding: 3px 20px 3px 20px
+		background-color: rgba(78, 205, 196, 0.8)
+		border-radius: 5px 0 0 5px
+		align-items: center
+		text-align: center
+		font-family: Lato
+		font-style: normal
+		font-weight: 700
+		font-size: 16px
+		cursor: pointer
+		&--detail
+			border-radius: 5px
+	&_delete
+		display: flex
+		margin: 5px 5px 5px 0
+		border-radius: 0 5px 5px 0
+		padding: 3px 20px 3px 0
+
+.tagField
+	display: flex
+	flex-wrap: wrap
+	align-items: flex-start
+	height: 62px
+	width: 35%
+	text-align: center
+	&__sticky
+		position: sticky
+		top: 13vh
+	&__newPost
+		width: 100%
+		margin-top: 10px
+	&_title
+		display: block
+		width: 100%
+		margin-bottom: 20px
+		font-family: Lato
+		font-style: normal
+		font-weight: 700
+		font-size: 24px
+	&_newTag
+		display: flex
+		width: 100%
+		margin-bottom: 40px
+	&_input, &_btn
+		border-radius: 5px 0 0 5px
+		border: 0px solid
+		margin-top: 20px
+		font-family: Lato
+		font-style: normal
+		font-weight: 700
+		font-size: 18px
+		padding: 10px
+		width: 70%
+		box-sizing: border-box
+	&_btn
+		border-radius: 0 5px 5px 0
+		width: 30%
+		background-color: rgba(78, 205, 196, 0.8)
+
+.tags
+	display: flex
+	flex-wrap: wrap
+	align-items: center
+	align-self: center
+	&_text
+		display: flex
+		padding-right: 20px
+		align-items: center
+		text-align: center
+		padding-left: 50px
+		font-family: Lato
+		font-style: normal
+		font-weight: 700
+		font-size: 18px
+	&_tag
+		display: flex
+		margin: 5px
+		padding: 3px 20px
+		background-color: #d195ff
+		border-radius: 5px
+		align-items: center
+		text-align: center
+		font-family: Lato
+		font-style: normal
+		font-weight: 700
+		font-size: 16px
+		cursor: pointer
+		box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25)
+		&--active
+			background-color: rgba(78, 205, 196, 0.8)
+			transition: all 0.5s ease
