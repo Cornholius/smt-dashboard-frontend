@@ -9,7 +9,6 @@ export default class Wiki extends Component {
         this.state = {
             activeTag: '',
         }
-        this.imageRef = React.createRef()
         this.filterByTag = this.filterByTag.bind(this)
     }
 
@@ -19,6 +18,11 @@ export default class Wiki extends Component {
         this.props.onUpdateSearchText('TAG' + currentTag.title)
     }
 
+    detailedViewPost(post) {
+        console.log(post)
+        this.props.detailedPost(post)
+        this.props.history.push('/postdetailed')
+    }
 
     render() {
         const {posts, tags, fadeinup} = this.props
@@ -26,7 +30,7 @@ export default class Wiki extends Component {
         const renderedPosts = posts.map((post) => {
             return(
                 <FadeInUpAnimation>
-                <div className="card" key={post.id}>
+                <div className="card" key={post.id} onClick={() => this.detailedViewPost(post)}>
                     <div className="tags">
                         <div className="tags_text">Теги:</div>
                         {post.tags.map((tag) => {

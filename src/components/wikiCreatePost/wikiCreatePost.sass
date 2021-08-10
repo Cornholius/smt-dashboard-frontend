@@ -1,94 +1,95 @@
 .newpost
-  display: grid
-  width: 100%
-  grid-template-columns: 50% 30%
-  gap: 20px
-  justify-items: stretch
-  &_fadein
-    display: flex
-    width: 100%
-  &_title, &_text, &_tags, &_droparea
-    display: block
-    grid-column-start: 1
-    grid-column-end: 2
-    border-radius: 5px
-    border: 0px solid
-    font-family: Lato
-    font-style: normal
-    font-weight: 700
-    font-size: 18px
-    padding: 10px
-    box-sizing: border-box
-    &::placeholder
-      color: #3b3b3b
-  &_title, &_tags
-    height: 40px
-  &_title
-    margin-top: 0
-  &_text
-    height: 400px
-    resize: none
-  &_droparea
-    display: flex
-    align-self: stretch
-    grid-column-start: 2
-    grid-column-end: 3
-    grid-row-start: 1
-    grid-row-end: 4
-    width: 100%
-    align-items: center
-    background-color: #fff
-  &_dropareatext
-    color: #3b3b3b
-    margin: 0
-    padding: 0 20px
-    text-align: center
-    box-sizing: border-box
-    background-color: #fff
-  &_btn
-    grid-column-start: 2
-    grid-column-end: 3
-    grid-row-start: 4
-    grid-row-end: 5
-    align-self: flex-end
-    width: 170px
-    height: 50px
-    border: 0
-    outline: none
-    outline-offset: 0
-    font-family: Lato
-    font-style: normal
-    font-weight: 400
-    font-size: 18px
-    background-color: rgba(78, 205, 196, 0.8)
-    border-radius: 5px
-    justify-self: end
+	display: grid
+	width: 100%
+	grid-template-columns: 50% 30%
+	gap: 20px
+	justify-items: stretch
+	&_fadein
+		display: flex
+		width: 100%
+	&_title, &_text, &_tags, &_droparea
+		display: block
+		grid-column-start: 1
+		grid-column-end: 2
+		border-radius: 5px
+		border: 0px solid
+		font-family: Lato
+		font-style: normal
+		font-weight: 700
+		font-size: 18px
+		padding: 10px
+		box-sizing: border-box
+		&::placeholder
+			text-align: center
+			color: #9c9c9c
+	&_title, &_tags
+		height: 40px
+	&_title
+		margin-top: 0
+	&_text
+		height: 400px
+		resize: none
+	&_droparea
+		display: flex
+		align-self: stretch
+		grid-column-start: 2
+		grid-column-end: 3
+		grid-row-start: 1
+		grid-row-end: 4
+		width: 100%
+		align-items: center
+		background-color: #fff
+	&_dropareatext
+		color: #9c9c9c
+		margin: 0
+		padding: 0 20px
+		text-align: center
+		box-sizing: border-box
+		background-color: #fff
+	&_btn
+		grid-column-start: 2
+		grid-column-end: 3
+		grid-row-start: 4
+		grid-row-end: 5
+		align-self: flex-end
+		width: 170px
+		height: 50px
+		border: 0
+		outline: none
+		outline-offset: 0
+		font-family: Lato
+		font-style: normal
+		font-weight: 400
+		font-size: 18px
+		background-color: rgba(78, 205, 196, 0.8)
+		border-radius: 5px
+		justify-self: end
 
 .files
-  display: flex
-  flex-wrap: wrap
-  align-self: start
-  grid-column-start: 1
-  grid-column-end: 2
-  grid-row-start: 4
-  grid-row-end: 5
-  &_item
-    display: flex
-  &_name, &_delete
-    display: flex
-    margin: 5px 0 5px 5px
-    padding: 3px 20px 3px 20px
-    background-color: rgba(78, 205, 196, 0.8)
-    border-radius: 5px 0 0 5px
-    align-items: center
-    text-align: center
-    font-family: Lato
-    font-style: normal
-    font-weight: 700
-    font-size: 16px
-    cursor: pointer
-  &_delete
-    display: flex
-    margin: 5px 5px 5px 0
-    border-radius: 0 5px 5px 0
-    padding: 3px 20px 3px 0
+	display: flex
+	flex-wrap: wrap
+	align-self: start
+	grid-column-start: 1
+	grid-column-end: 2
+	grid-row-start: 4
+	grid-row-end: 5
+	&_item
+		display: flex
+	&_name, &_delete
+		display: flex
+		margin: 5px 0 5px 5px
+		padding: 3px 20px 3px 20px
+		background-color: rgba(78, 205, 196, 0.8)
+		border-radius: 5px 0 0 5px
+		align-items: center
+		text-align: center
+		font-family: Lato
+		font-style: normal
+		font-weight: 700
+		font-size: 16px
+		cursor: pointer
+	&_delete
+		display: flex
+		margin: 5px 5px 5px 0
+		border-radius: 0 5px 5px 0
+		padding: 3px 20px 3px 0

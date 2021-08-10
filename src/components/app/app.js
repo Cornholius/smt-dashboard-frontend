@@ -6,6 +6,7 @@ import Sidebar from '../sidebar/sidebar'
 import Wiki from '../wiki/wiki'
 import Todo from '../todo/todo'
 import WikiCreatePost from "../wikiCreatePost/wikiCreatePost";
+import WikiDetailPost from "../wikiDetailPost/wikiDetailPost";
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import styled, { keyframes } from 'styled-components';
 import {fadeInUp, fadeIn} from 'react-animations';
@@ -17,6 +18,7 @@ export default class App extends Component {
         super(props);
         this.state = {
             posts: [],
+            detailedPost: '',
             tags: [],
             FadeInUpAnimation: styled.div`animation: 0.8s ${keyframes`${fadeInUp}`}`,
             FadeInAnimation:  styled.div`animation: 1s ${keyframes`${fadeIn}`}`,
@@ -27,6 +29,7 @@ export default class App extends Component {
         this.onUpdateSearchText = this.onUpdateSearchText.bind(this);
         this.postData = this.postData.bind(this);
         this.tagData = this.tagData.bind(this);
+        this.detailedPost = this.detailedPost.bind(this);
         this.getAllData(this.state.postUrl, 'posts')
         this.getAllData(this.state.tagUrl, 'tags')
     }
@@ -111,8 +114,12 @@ export default class App extends Component {
         }
     }
 
+    detailedPost(post) {
+        this.setState({detailedPost: post})
+    }
+
     render() {
-        const {posts, tags, lookingFor, FadeInUpAnimation, FadeInAnimation, postUrl, tagUrl} = this.state
+        const {posts, detailedPost, tags, lookingFor, FadeInUpAnimation, FadeInAnimation, postUrl, tagUrl} = this.state
         return(
             <Router>
                 <div className="app">
@@ -124,6 +131,7 @@ export default class App extends Component {
                         path='/wiki'
                         render={ (props) => <Wiki {...props}
                                                   posts={this.onSearch(posts, lookingFor)}
+                                                  detailedPost={this.detailedPost}
                                                   onUpdateSearchText={this.onUpdateSearchText}
                                                   tags={tags}
                                                   tagUrl={tagUrl}
@@ -142,6 +150,13 @@ export default class App extends Component {
                                                             tags={tags}
                                                             postUrl={postUrl}
                                                             tagUrl={tagUrl}
+                                                            fadein={FadeInAnimation}
+                                                            fadeinup={FadeInUpAnimation}/> }
+                    />
+                    <Route
+                        path='/postdetailed'
+                        render={ (props) => <WikiDetailPost {...props}
+                                                            post={detailedPost}
                                                             fadein={FadeInAnimation}
                                                             fadeinup={FadeInUpAnimation}/> }
                     />
