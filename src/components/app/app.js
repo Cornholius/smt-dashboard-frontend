@@ -19,12 +19,13 @@ export default class App extends Component {
         this.state = {
             posts: [],
             detailedPost: '',
+            ModifyPost: '',
             tags: [],
             FadeInUpAnimation: styled.div`animation: 0.8s ${keyframes`${fadeInUp}`}`,
             FadeInAnimation:  styled.div`animation: 1s ${keyframes`${fadeIn}`}`,
             lookingFor: '',
-            postUrl: 'http://127.0.0.1:8000/api/posts/',
-            tagUrl: 'http://127.0.0.1:8000/api/tags/',
+            postUrl: 'http://10.10.10.64:8000/api/posts/',
+            tagUrl: 'http://10.10.10.64:8000/api/tags/',
         }
         this.onUpdateSearchText = this.onUpdateSearchText.bind(this);
         this.postData = this.postData.bind(this);

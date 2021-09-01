@@ -1,8 +1,10 @@
 .cardField
-	width: 65%
+	width: 75%
 	padding-right: 20px
 
 .card
+	display: flex
+	flex-direction: column
 	margin-bottom: 30px
 	background-color: #fff
 	padding: 20px
@@ -10,10 +12,10 @@
 	box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.25)
 	&_title
 		margin-top: 40px
-		display: flex
+		display: block
 		padding-right: 20px
 		align-items: center
-		text-align: center
+		// text-align: center
 		padding-left: 50px
 		font-family: Lato
 		font-style: normal
@@ -21,7 +23,7 @@
 		font-size: 24px
 	&_text
 		margin-top: 20px
-		display: flex
+		display: block
 		padding-right: 20px
 		align-items: center
 		padding-left: 50px
@@ -29,5 +31,27 @@
 		font-style: normal
 		font-weight: 400
 		font-size: 20px
-
-
+	&_button
+		display: flex
+		align-self: flex-end
+		width: 160px
+		height: 50px
+		margin: 20px 50px 0 0
+		border: 0
+		outline: none
+		outline-offset: 0
+		font-family: Lato
+		font-style: normal
+		font-weight: 400
+		font-size: 18px
+		background-color: rgba(78, 205, 196, 0.8)
+		border-radius: 5px
+		text-align: center
+		justify-content: center;
+		align-items: center
+		&:hover
+			background-color: #d195ff
+			transition: all 1s ease
+			cursor: pointer
+			transform: scale(1.15)
+			

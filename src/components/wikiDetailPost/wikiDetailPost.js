@@ -8,6 +8,12 @@ export default class WikiDetailPost extends Component {
         super(props);
         this.state = {};
     };
+    
+    ModifyPost(post) {
+        console.log(post)
+        this.props.detailedPost(post)
+        this.props.history.push('/postdetailed')
+    }
 
     render() {
         const {post} = this.props
@@ -32,7 +38,7 @@ export default class WikiDetailPost extends Component {
                             )})}
                         </div>
                     </div>
-                    
+                    <div className="post_button">Редактировать</div>
                 </div>
             </section>
         )

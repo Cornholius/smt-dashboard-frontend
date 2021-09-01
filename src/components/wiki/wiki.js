@@ -30,7 +30,7 @@ export default class Wiki extends Component {
         const renderedPosts = posts.map((post) => {
             return(
                 <FadeInUpAnimation>
-                <div className="card" key={post.id} onClick={() => this.detailedViewPost(post)}>
+                <div className="card" key={post.id}>
                     <div className="tags">
                         <div className="tags_text">Теги:</div>
                         {post.tags.map((tag) => {
@@ -39,12 +39,13 @@ export default class Wiki extends Component {
                             )
                         })}
                     </div>
-                    {/* <div className="line mtb10"></div> */}
-
-                    <div className="card_title">{post.title}</div>
-                    <div className="line mtb10"></div>
+                    <div className="card_title">
+                        <span>{post.title}</span>
+                    </div>
+                    <div className="line line--w30 mtb10"></div>
 
                     <div className="card_text">{post.text}</div>
+                    <div className="card_button" onClick={() => this.detailedViewPost(post)}>Перейти</div>
                 </div>
                 </FadeInUpAnimation>
             )
