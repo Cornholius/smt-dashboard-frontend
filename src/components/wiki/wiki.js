@@ -19,7 +19,6 @@ export default class Wiki extends Component {
     }
 
     detailedViewPost(post) {
-        console.log(post)
         this.props.detailedPost(post)
         this.props.history.push('/postdetailed')
     }

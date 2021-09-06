@@ -7,19 +7,28 @@ export default class WikiCreatePost extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            titleInput: '',
-            textInput: '',
-            tagsInput: '',
-            document: [],
+            titleInput: this.props.modifyPostData.title,
+            textInput: this.props.modifyPostData.text,
+            tagsInput: this.props.modifyPostData.tags,
+            document: this.props.modifyPostData.media,
         };
         this.fillTheForm = this.fillTheForm.bind(this);
         this.createNewPost = this.createNewPost.bind(this);
         this.onDropEvent = this.onDropEvent.bind(this);
         this.onDeleteBtn = this.onDeleteBtn.bind(this);
+        // this.ifModifyPost = this.ifModifyPost.bind(this);
+        // this.ifModifyPost()
     };
+
+    // ifModifyPost() {
+    //     this.setState({titleInput: this.props.modifyPostData.title})
+    //     console.log('===>', this.state.titleInput)
+    //     console.log('===>', this.props.modifyPostData.title)
+    // }
 
     fillTheForm(e) {
         this.setState({[e.target.name]: e.target.value});
+        console.log(e.target.name, e.target.value)
     }
 
     async createNewPost(e) {
@@ -63,11 +72,20 @@ export default class WikiCreatePost extends Component {
         })
     }
 
+    modifyPost() {
+        const modifyData = {
+            'title': '',
+            'text': '',
+            'tags': ''
+        }
+        this.props.ModifyPost(modifyData)
+    }
+
     render() {
         const {fadein, fadeinup} = this.props
         const FadeIn = fadein
         const FadeInUp = fadeinup
-
+        const qwe = this.ifModifyPost
         return(
             <section className="content">
                 <FadeIn className="newpost_fadein around">
@@ -78,18 +96,21 @@ export default class WikiCreatePost extends Component {
                         name='titleInput'
                         placeholder='название заметки'
                         maxLength='100'
+                        defaultValue={this.props.modifyPostData.title}
                         onChange={this.fillTheForm}/>
                     <textarea
                         className='newpost_text'
                         name='textInput'
                         placeholder='Текст заметки'
                         maxLength='2000'
+                        defaultValue={this.props.modifyPostData.text}
                         onChange={this.fillTheForm}/>
                     <input
                         className='newpost_tags'
                         name='tagsInput'
                         placeholder='пиши сюда теги через пробел'
                         maxLength='100'
+                        defaultValue={this.props.modifyPostData.tags}
                         onChange={this.fillTheForm}/>
 
                     <div
@@ -113,7 +134,7 @@ export default class WikiCreatePost extends Component {
                             )
                         })}
                     </div>
-                    <button className="newpost_btn" type="submit">Создать</button>
+                    <button className="newpost_btn" type="submit" onClick={() => this.modifyPost()}>Создать</button>
                 </form>
                 </FadeIn>
             </section>

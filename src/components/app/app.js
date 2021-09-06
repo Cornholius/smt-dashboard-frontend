@@ -19,7 +19,7 @@ export default class App extends Component {
         this.state = {
             posts: [],
             detailedPost: '',
-            ModifyPost: '',
+            modifyPostData: '',
             tags: [],
             FadeInUpAnimation: styled.div`animation: 0.8s ${keyframes`${fadeInUp}`}`,
             FadeInAnimation:  styled.div`animation: 1s ${keyframes`${fadeIn}`}`,
@@ -31,6 +31,8 @@ export default class App extends Component {
         this.postData = this.postData.bind(this);
         this.tagData = this.tagData.bind(this);
         this.detailedPost = this.detailedPost.bind(this);
+        this.ModifyPost = this.ModifyPost.bind(this);
+
         this.getAllData(this.state.postUrl, 'posts')
         this.getAllData(this.state.tagUrl, 'tags')
     }
@@ -119,8 +121,11 @@ export default class App extends Component {
         this.setState({detailedPost: post})
     }
 
+    ModifyPost(data) {
+        this.setState({modifyPostData: data})
+    }
     render() {
-        const {posts, detailedPost, tags, lookingFor, FadeInUpAnimation, FadeInAnimation, postUrl, tagUrl} = this.state
+        const {posts, detailedPost, modifyPostData, tags, lookingFor, FadeInUpAnimation, FadeInAnimation, postUrl, tagUrl} = this.state
         return(
             <Router>
                 <div className="app">
@@ -151,6 +156,8 @@ export default class App extends Component {
                                                             tags={tags}
                                                             postUrl={postUrl}
                                                             tagUrl={tagUrl}
+                                                            modifyPostData={modifyPostData}
+                                                            ModifyPost={this.ModifyPost}
                                                             fadein={FadeInAnimation}
                                                             fadeinup={FadeInUpAnimation}/> }
                     />
@@ -158,6 +165,7 @@ export default class App extends Component {
                         path='/postdetailed'
                         render={ (props) => <WikiDetailPost {...props}
                                                             post={detailedPost}
+                                                            ModifyPost={this.ModifyPost}
                                                             fadein={FadeInAnimation}
                                                             fadeinup={FadeInUpAnimation}/> }
                     />

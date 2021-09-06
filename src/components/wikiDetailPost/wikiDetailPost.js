@@ -9,10 +9,17 @@ export default class WikiDetailPost extends Component {
         this.state = {};
     };
     
-    ModifyPost(post) {
-        console.log(post)
-        this.props.detailedPost(post)
-        this.props.history.push('/postdetailed')
+    modifyPost(post) {
+        const modifyData = {
+            'title': post.title,
+            'text': post.text,
+            'tags': post.tags.map(tag => {
+                return tag.title
+            }).join(' '),
+            'media': post.media
+        }
+        this.props.ModifyPost(modifyData)
+        this.props.history.push('/createpost')
     }
 
     render() {
@@ -38,7 +45,7 @@ export default class WikiDetailPost extends Component {
                             )})}
                         </div>
                     </div>
-                    <div className="post_button">Редактировать</div>
+                    <div className="post_button" onClick={() => this.modifyPost(post)}>Редактировать</div>
                 </div>
             </section>
         )
